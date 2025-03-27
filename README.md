@@ -1,7 +1,4 @@
-# <div style="border: 2px solid #000; display: inline-block; padding: 5px 10px; font-size: 24px; font-weight: bold;">
-  O_S
-</div>
- - 🔒 Security Vulnerability Detection Framework
+# O_S - 🔒 Security Vulnerability Detection Framework
 
 A comprehensive framework for detecting and mitigating security vulnerabilities in operating systems, featuring real-time monitoring, attack simulation, and recovery recommendations.
 
