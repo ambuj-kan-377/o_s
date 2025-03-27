@@ -1,4 +1,4 @@
-# o_s 🔒 Security Vulnerability Detection Framework
+# <BUTTON>o_s</BUTTON> - 🔒 Security Vulnerability Detection Framework
 
 A comprehensive framework for detecting and mitigating security vulnerabilities in operating systems, featuring real-time monitoring, attack simulation, and recovery recommendations.
 
