@@ -68,7 +68,7 @@ class RecoveryManager:
                 "   • Regular security audits\n"
                 "   • Keep systems updated"
             ),
-            "Trapdoor Injection": (
+            "Trapdoor": (
                 "Recovery Steps:\n\n"
                 "1. System Monitoring:\n"
                 "   • Continuously monitor for unknown processes and open ports\n"
@@ -226,7 +226,7 @@ class DetectionEngine:
         port = 12345  # fixed port
         result = enhanced_trapdoor_simulation(port, update_func)
         additional_info = {"port": port}
-        self.alert_system.log_alert("Trapdoor Injection", result, additional_info, "high")
+        self.alert_system.log_alert("Trapdoor", result, additional_info, "high")
 
     def run_simulations(self):
         while True:
@@ -245,7 +245,7 @@ def start_detection_engine():
     thread = threading.Thread(target=detection_engine.run_simulations, daemon=True)
     thread.start()
 
-start_detection_engine()
+# start_detection_engine()  # <-- Remove or comment out this line so simulations do not run automatically
 
 def start_cache_server():
     cache_app.run(host="0.0.0.0", port=5001, debug=False, use_reloader=False)
