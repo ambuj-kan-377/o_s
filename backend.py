@@ -63,7 +63,7 @@ class RecoveryManager:
                 "   • Regular security audits\n"
                 "   • Keep systems updated"
             ),
-            "Trapdoor Injection": (
+            "Trapdoor": (
                 "Recovery Steps:\n\n"
                 "1. System Monitoring:\n"
                 "   • Continuously monitor for unknown processes and open ports\n"
@@ -221,7 +221,7 @@ class DetectionEngine:
         port = 12345  # fixed port
         result = enhanced_trapdoor_simulation(port, update_func)
         additional_info = {"port": port}
-        self.alert_system.log_alert("Trapdoor Injection", result, additional_info, "high")
+        self.alert_system.log_alert("Trapdoor", result, additional_info, "high")
 
     def run_simulations(self):
         while True:
