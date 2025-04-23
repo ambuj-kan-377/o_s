@@ -58,12 +58,16 @@ class VulnerabilityScannerGUI:
         self.bo_button = Button(self.buttons_frame, text="Simulate Buffer Overflow", 
                               command=self.test_buffer_overflow, **btn_style)
         self.bo_button.pack(pady=5)
-        self.td_button = Button(self.buttons_frame, text="Simulate Trapdoor Injection", 
+        self.td_button = Button(self.buttons_frame, text="Simulate Trapdoor", 
                               command=self.simulate_trapdoor, **btn_style)
         self.td_button.pack(pady=5)
         self.cp_button = Button(self.buttons_frame, text="Simulate Cache Poisoning", 
                               command=self.simulate_cache_poisoning, **btn_style)
         self.cp_button.pack(pady=5)
+        # Add button for automatic simulation
+        self.auto_sim_button = Button(self.buttons_frame, text="Start Automatic Simulation", 
+                                     command=self.start_automatic_simulation, **btn_style)
+        self.auto_sim_button.pack(pady=5)
         
         # --------------------
         # Recovery / Prevention Panel
@@ -206,7 +210,7 @@ class VulnerabilityScannerGUI:
         # Draw arrow from client to server representing secret command
         self.canvas.create_line(350, 75, 150, 75, arrow=tk.LAST, fill="#F44336", 
                               width=2)
-        self.canvas.create_text(200, 30, text="Trapdoor Injection\n(secret_command)", 
+        self.canvas.create_text(200, 30, text="Trapdoor\n(secret_command)", 
                               fill="#F44336", font=("Arial", 10, "bold"))
         self.master.after(2000, lambda: self.canvas.create_text(200, 150, 
                                                               text="Trapdoor Activated!", 
@@ -239,9 +243,9 @@ class VulnerabilityScannerGUI:
 
     def simulate_trapdoor(self):
         self.details_text.delete(1.0, END)
-        self.update_details("Initiating Trapdoor Injection Simulation...")
+        self.update_details("Initiating Trapdoor Simulation...")
         self.detection_engine.simulate_trapdoor(self.simulation_log)
-        recovery = self.recovery_manager.suggest_recovery("Trapdoor Injection")
+        recovery = self.recovery_manager.suggest_recovery("Trapdoor")
         self.recovery_text.delete(1.0, END)
         self.recovery_text.insert(END, recovery)
         self.animate_trapdoor()
@@ -260,3 +264,22 @@ class VulnerabilityScannerGUI:
         messagebox.showwarning("Cache Poisoning Detected!",
                              "Cache poisoning attack detected!\n"
                              "Check the recovery suggestions for mitigation steps.") 
+
+    def start_automatic_simulation(self):
+        if hasattr(self, 'auto_sim_thread') and self.auto_sim_thread.is_alive():
+            messagebox.showinfo("Info", "Automatic simulation is already running.")
+            return
+        import threading
+        def run_auto():
+            self.update_details("Automatic simulation started. Attacks will be simulated at random intervals.")
+            while True:
+                import random, time
+                attack = random.choice([
+                    self.test_buffer_overflow,
+                    self.simulate_trapdoor,
+                    self.simulate_cache_poisoning
+                ])
+                attack()
+                time.sleep(random.randint(10, 20))
+        self.auto_sim_thread = threading.Thread(target=run_auto, daemon=True)
+        self.auto_sim_thread.start()
